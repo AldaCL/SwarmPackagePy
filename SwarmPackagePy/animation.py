@@ -77,3 +77,42 @@ def animation3D(agents, function, lb, ub, sr=False):
         ani.save('result.mp4')
     
     plt.show()
+
+def convergence_plot(agents, function, lb, ub):
+    """
+    Generates a convergence plot image of the agents for all iterations
+    And stores the plot in a file with the name of the function, the number of agents, and the number of iterations and dimension
+    :param agents: agents
+    :param function: function
+    :param lb: lower bound
+    :param ub: upper bound
+    """
+
+    side = np.linspace(lb, ub, 100)
+    X, Y = np.meshgrid(side, side)
+    Z = np.array([np.array([function([X[i][j], Y[i][j]])
+                            for j in range(len(X))])
+                  for i in range(len(X[0]))])
+
+    fig = plt.figure()
+    plt.axes(xlim=(lb, ub), ylim=(lb, ub))
+    plt.pcolormesh(X, Y, Z, shading='gouraud')
+    plt.colorbar()
+
+    x = np.array([j[0] for j in agents[0]])
+    y = np.array([j[1] for j in agents[0]])
+    sc = plt.scatter(x, y, color='black')
+
+    plt.title(function.__name__, loc='left')
+
+    for i in range(1, len(agents)):
+        x = np.array([j[0] for j in agents[i]])
+        y = np.array([j[1] for j in agents[i]])
+        sc.set_offsets(list(zip(x, y)))
+        plt.title('iteration: {}'.format(i), loc='right')
+
+        plt.savefig('convergence_{}_{}_{}_{}.png'.format(function.__name__, len(agents), len(agents[0]), i))
+
+    plt.show()
+
+   
