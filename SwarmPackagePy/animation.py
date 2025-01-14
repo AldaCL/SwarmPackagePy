@@ -5,8 +5,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import pandas as pd
 
-
 def animation(agents, function, lb, ub, sr=False):
+    matplotlib.use("TkAgg")
 
     side = np.linspace(lb, ub, (ub - lb) * 5)
     X, Y = np.meshgrid(side, side)
@@ -41,7 +41,6 @@ def animation(agents, function, lb, ub, sr=False):
 
 
 def animation3D(agents, function, lb, ub, sr=False):
-
     side = np.linspace(lb, ub, 45)
     X, Y = np.meshgrid(side, side)
     zs = np.array([function([x, y]) for x, y in zip(np.ravel(X), np.ravel(Y))])

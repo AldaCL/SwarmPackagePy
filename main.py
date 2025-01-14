@@ -11,6 +11,6 @@ from SwarmPackagePy import animation, animation3D
 if __name__ == "__main__":
     # Compute the algorithm
     function = SwarmPackagePy.testFunctions.easom_function
-    alh = SwarmPackagePy.pso(n=50, function=function, lb=-10, ub=10, dimension=2, iteration=20, w=0.5, c1=1, c2=1)
+    alh = SwarmPackagePy.pso(15, function, -10, 10, 2, 20)
     # Show animation
-    animation(alh.get_agents(), function, 10, -10)
+    animation3D(alh.get_agents(), function, -100, 100)
