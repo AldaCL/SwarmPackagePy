@@ -9,6 +9,8 @@ from SwarmPackagePy import animation, animation3D
 # animation3D(alh.get_agents(), tf.easom_function, -10, 10)
 
 if __name__ == "__main__":
-    function_2 = SwarmPackagePy.aba(50, tf.three_hump_camel_function, -60, 60, 2, 100)
-    animation(function_2.get_agents(),tf.three_hump_camel_function, -60, 60 )
-    
+    # Compute the algorithm
+    function = SwarmPackagePy.testFunctions.easom_function
+    alh = SwarmPackagePy.pso(n=50, function=function, lb=-10, ub=10, dimension=2, iteration=20, w=0.5, c1=1, c2=1)
+    # Show animation
+    animation(alh.get_agents(), function, 10, -10)
