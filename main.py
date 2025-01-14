@@ -17,7 +17,7 @@ if __name__ == "__main__":
     list_of_functions = tf.default_all_functions_initialize()
     list_of_algorithms = [aba, ba, bfo, ca, cso, fa, fwa, gsa, gwo, hs, pso, ssa, wsa]
     # List of population sizes
-    list_of_population = [10, 20, 30, 40, 50]
+    list_of_population = [10, 20, 30]
 
     # All functions will be evaluated in a [-10, 10] space
     lb = -100
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # For example, dixon_price_function can be evaluated in 2, 5, 10, 20, 30, 50, 100 dimensions.
     # Each algorithm handles the dimensions and generates a random population in the specified dimension
 
-    list_of_dimensions = [2, 3, 5]
+    list_of_dimensions = [100, 150]
     
     # Then evaulate the algorithms in the functions and dimensions. 
     # It's important to store the results in a file, so we can analyze the results later.
@@ -38,6 +38,7 @@ if __name__ == "__main__":
 
     # The principal data that we want to analyze is the Best Value, the mean population, the mean execution time and the mean best agent.
     results = []
+    agents_by_algorithm = {}
     for function in list_of_functions:
         # print(f'Function: {function.__name__}')
         for algorithm in list_of_algorithms:
@@ -46,9 +47,20 @@ if __name__ == "__main__":
                 # print(f'Dimension: {dimension}')
                 for n in list_of_population:
                     # Execute the algorithm
-                    alh = algorithm(n, function, lb, ub, dimension, 20)
+                    # alh = algorithm(n, function, lb, ub, dimension, 20)
                     # Generate convergence plot
-                    convergence.convergence_plot(alh.get_agents(), function, algorithm.__name__, dimension)
+                    # convergence.convergence_plot(alh.get_agents(), function, algorithm.__name__, dimension)
+                    pass
+    
 
-    # For each function, algorithm we will generate a plot to illustrate the convergence of the algorithm
-    # We will store the plots in a folder called plots
+    for function in list_of_functions:
+    # print(f'Function: {function.__name__}')
+        for algorithm in list_of_algorithms:
+            # print(f'Algorithm: {algorithm.__name__}')
+                # Execute the algorithm
+                alh = algorithm(20, function, lb, ub, 100, 35)
+                # Generate convergence plot
+                agents_by_algorithm[algorithm.__name__] = alh.get_agents()
+                # convergence.convergence_plot(alh.get_agents(), function, algorithm.__name__, dimension)
+        # Generate a grouped convergence plot
+        convergence.generate_grouped_convergence_plots(agents_by_algorithm, function)

@@ -55,6 +55,7 @@ class aba(intelligence.sw):
                                                                    count[3],
                                                                    lb, ub)
             m = len(newbee)
+            # only positive dimensions
             self.__agents = newbee + list(np.random.uniform(lb, ub, (n - m,
                                                                    dimension)))
 
