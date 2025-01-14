@@ -1,2 +1,56 @@
-# Latex report of Swarm Algorithms implementations and benchmanrking
+% The FYP template is designed according to NTU SCSE FYP guidelines on https://www3.ntu.edu.sg/scse/fyp/UsefulInfo/Report%20Guide.pdf.
 
+% Credit
+% Original version by Vincent Ribli
+% https://www.overleaf.com/latex/templates/ntu-scse-fyp-template/kwdtcbqmjctk
+
+% Revised by Prof Loy Chen Change
+% 23 Aug 2024 - Replace SCSE with CCDS
+
+\documentclass[pdftex, 12pt, a4paper]{report}
+\usepackage{newtxtext, newtxmath}
+\usepackage[top=3cm, bottom=3cm, left=3.5cm, right=3cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[sorting=none]{biblatex}
+\usepackage[spanish]{babel}
+\addbibresource{bib.bib}
+\setstretch{1.5}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
+\renewcommand{\cftdotsep}{1}
+
+% change the following
+\title{\uppercase{SwarmPackage: Introducción e implementación de algoritmos de 
+Inteligencia de enjambre}}
+\newcommand\fypcode{Metaheurísticas}
+\author{Jorge Aldair Cortés López}
+\date{2025}
+
+\begin{document}
+\input{title.tex}
+
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+\input{abstract.tex}
+
+\pagebreak
+\addcontentsline{toc}{chapter}{Contenido}
+\tableofcontents
+
+\pagebreak
+\addcontentsline{toc}{chapter}{Lista de fíguras}
+\listoffigures
+\printbibliography
+\cleardoublepage
+\pagenumbering{arabic}
+
+\end{document}
