@@ -73,3 +73,43 @@ def beale_function(x):
 def drop_wave_function(x):
     return -(1 + cos(12*sqrt(sphere_function(x))))/(0.5*sphere_function(x) + 2)
 
+
+
+def default_all_functions_initialize() -> list:
+        return [ackley_function, bukin_function, cross_in_tray_function,
+                sphere_function, bohachevsky_function, sum_squares_function,
+                sum_of_different_powers_function, booth_function,
+                matyas_function, mccormick_function, dixon_price_function,
+                six_hump_camel_function, three_hump_camel_function,
+                easom_function, michalewicz_function, beale_function,
+                drop_wave_function]
+
+
+class FunctionPlotter():
+    def __init__(self, function, lb, ub):
+        self.function = function
+        self.lb = lb
+        self.ub = ub
+
+    def plot(self):
+        import matplotlib.pyplot as plt
+        from mpl_toolkits.mplot3d import Axes3D
+        import numpy as np
+
+        side = np.linspace(self.lb, self.ub, 100)
+        X, Y = np.meshgrid(side, side)
+        Z = np.array([np.array([self.function([X[i][j], Y[i][j]])
+                                for j in range(len(X))])
+                      for i in range(len(X[0]))])
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.plot_surface(X, Y, Z, cmap='viridis')
+
+        ax.set_xlabel('X Label')
+        ax.set_ylabel('Y Label')
+        ax.set_zlabel('Z Label')
+
+        # Save the figure as a PNG file with function.__name__ name 
+        plt.savefig(self.function.__name__ + '.png')
+        

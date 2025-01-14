@@ -9,8 +9,9 @@ from SwarmPackagePy import animation, animation3D
 # animation3D(alh.get_agents(), tf.easom_function, -10, 10)
 
 if __name__ == "__main__":
-    # Compute the algorithm
-    function = SwarmPackagePy.testFunctions.easom_function
-    alh = SwarmPackagePy.pso(15, function, -10, 10, 2, 20)
-    # Show animation
-    animation3D(alh.get_agents(), function, -100, 100)
+    # plot all test functions in 2D
+
+    list_of_functions = tf.default_all_functions_initialize()
+    for function_benchmark in list_of_functions:
+        plotter = tf.FunctionPlotter(function_benchmark, -20, 20)
+        plotter.plot()

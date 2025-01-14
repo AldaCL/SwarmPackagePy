@@ -59,31 +59,21 @@ def animation3D(agents, function, lb, ub, sr=False):
 
     fig.colorbar(surf, shrink=0.5, aspect=5)
 
-    iter = len(agents)
-    n = len(agents[0])
-    t = np.array([np.ones(n) * i for i in range(iter)]).flatten()
-    b = []
-    [[b.append(agent) for agent in epoch] for epoch in agents]
-    c = [function(x) for x in b]
-    a = np.asarray(b)
-    df = pd.DataFrame({"time": t, "x": a[:, 0], "y": a[:, 1], "z": c})
+    x = np.array([j[0] for j in agents[0]])
+    y = np.array([j[1] for j in agents[0]])
+    z = np.array([function(j) for j in agents[0]])
+    sc = ax.scatter(x, y, z, color='black')
 
-    def update_graph(num):
-        data = df[df['time'] == num]
-        graph._offsets3d = (data.x, data.y, data.z)
-        title.set_text(function.__name__ + " " * 45 + 'iteration: {}'.format(
-            num))
+    def an(i):
+        x = np.array([j[0] for j in agents[i]])
+        y = np.array([j[1] for j in agents[i]])
+        z = np.array([function(j) for j in agents[i]])
+        sc._offsets3d = (x, y, z)
+        plt.title('iteration: {}'.format(i), loc='right')
 
-    title = ax.set_title(function.__name__ + " " * 45 + 'iteration: 0')
-
-    data = df[df['time'] == 0]
-    graph = ax.scatter(data.x, data.y, data.z, color='black')
-
-    ani = matplotlib.animation.FuncAnimation(fig, update_graph, iter,
-                                             interval=50, blit=False)
-
+    ani = matplotlib.animation.FuncAnimation(fig, an, frames=len(agents) - 1)
+    
     if sr:
-
         ani.save('result.mp4')
-
+    
     plt.show()
