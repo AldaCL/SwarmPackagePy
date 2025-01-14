@@ -71,6 +71,10 @@ class ba(intelligence.sw):
 
             Pbest = self.__agents[
                 np.array([function(x) for x in self.__agents]).argmin()]
+            # TODO:Crear un arreglo que guarde los valores en cada iteracion guardar el mejor
+            # y generar función de convergencia.
+            # (Probar guardar en memoria) y vs guardar en disco en cada iteración
+            
             if function(Pbest) < function(Gbest):
                 Gbest = Pbest
 
